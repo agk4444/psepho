@@ -170,53 +170,5 @@
    }
   ]
  },
- "laya": {
-  "model": "convaiinnovations/laya (base checkpoint, zero-shot)",
-  "run_date": "2026-09-21",
-  "chunav_agreement": "16/23",
-  "differences": [
-   {
-    "race": "Texas Senate",
-    "jev_choice": "toss_up",
-    "jev_dem_pct": 43,
-    "laya_choice": "democrat_win"
-   },
-   {
-    "race": "Florida Senate",
-    "jev_choice": "republican_win",
-    "jev_dem_pct": 17,
-    "laya_choice": "democrat_win"
-   },
-   {
-    "race": "Iowa Senate",
-    "jev_choice": "republican_win",
-    "jev_dem_pct": 34,
-    "laya_choice": "democrat_win"
-   },
-   {
-    "race": "Alaska Senate",
-    "jev_choice": "toss_up",
-    "jev_dem_pct": 53,
-    "laya_choice": "democrat_win"
-   },
-   {
-    "race": "Kansas Governor",
-    "jev_choice": "republican_win",
-    "jev_dem_pct": 26,
-    "laya_choice": "democrat_win"
-   },
-   {
-    "race": "Nevada Governor",
-    "jev_choice": "republican_win",
-    "jev_dem_pct": 46,
-    "laya_choice": "democrat_win"
-   },
-   {
-    "race": "Florida Governor",
-    "jev_choice": "republican_win",
-    "jev_dem_pct": 28,
-    "laya_choice": "democrat_win"
-   }
-  ]
- }
+ "changes": "Texas Senate moved from 68% to 62% Democratic win probability."
 }

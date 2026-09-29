@@ -3,87 +3,165 @@
   "use strict";
   var DATA_URL = "data.json";
   var REFRESH_MS = 10 * 60 * 1000;
+  var STALE_MS = 4 * 3600 * 1000;
+
   var panelsEl = document.getElementById("panels");
   var tabBar = document.getElementById("tabBar");
   var tabs = Array.prototype.slice.call(tabBar.querySelectorAll(".tab"));
-  var freshText = document.getElementById("freshText");
-  var freshDot = document.getElementById("freshDot");
+  var liveBadge = document.getElementById("liveBadge");
+  var timestampEl = document.getElementById("timestamp");
+  var changesBox = document.getElementById("changesBox");
+  var changesText = document.getElementById("changesText");
+  var footerLine = document.getElementById("footerLine");
   var errBox = document.getElementById("errBox");
   var current = 0;
   var startX = null;
 
-  function pillClass(choice) {
-    return choice === "democrat_win" ? "dem" : choice === "republican_win" ? "rep" : "toss";
-  }
-  function pillText(choice) {
-    return choice === "democrat_win" ? "DEM WIN" : choice === "republican_win" ? "GOP WIN" : "TOSS-UP";
-  }
-  function verdictText(choice) {
-    return choice === "democrat_win" ? "Democrats take it"
-         : choice === "republican_win" ? "Republicans take it"
-         : "Too close to call";
-  }
+  var CALL = {
+    democrat_win:  { cls: "dem",  pill: "Democrat win",   prob: "Dem win" },
+    republican_win:{ cls: "gop",  pill: "Republican win", prob: "Republican win" },
+    toss_up:       { cls: "toss", pill: "Toss-up",        prob: "Toss-up" }
+  };
+
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
 
-  function cardHTML(r) {
-    var pc = pillClass(r.choice);
-    var conf = Math.round((r.confidence || 0) * 100);
-    return '<div class="card">' +
-      '<div class="card-top"><div class="race-label">' + esc(r.label) + "</div>" +
-      '<div class="pill ' + pc + '">' + pillText(r.choice) + "</div></div>" +
-      '<div class="pct ' + pc + '">' + r.display_pct + '%</div>' +
-      '<div class="verdict">' + verdictText(r.choice) + "</div>" +
-      '<div class="conf"><span>confidence</span><div class="bar"><i style="width:' + conf + '%"></i></div><span>' + conf + "%</span></div>" +
-      '<div class="inputs">' + esc(r.inputs_line) + "</div>" +
-      "</div>";
+  function callOf(choice) {
+    return CALL[choice] || CALL.toss_up;
   }
 
-  function ago(ts) {
-    var s = Math.max(0, Math.round((Date.now() - ts) / 1000));
-    if (s < 60) return "just now";
-    var m = Math.round(s / 60);
-    if (m < 60) return m + " min ago";
-    var h = Math.round(m / 60);
-    if (h < 48) return h + " hr ago";
-    return Math.round(h / 24) + " days ago";
+  function probBlock(r) {
+    var c = callOf(r.choice);
+    var mod = r.choice === "republican_win" ? " gop" : r.choice === "toss_up" ? " toss" : "";
+    var pct = Math.round(r.display_pct);
+    var aria = r.choice === "toss_up"
+      ? pct + " percent display for a toss-up"
+      : pct + " percent " + c.prob + " probability";
+    return '<div class="probability' + mod + '"><div class="bar-labels"><span>' + c.prob +
+      "</span><strong>" + pct + '%</strong></div><div class="bar" role="img" aria-label="' +
+      esc(aria) + '"><span style="width:' + pct + '%"></span></div></div>';
+  }
+
+  function chamberCard(r) {
+    var c = callOf(r.choice);
+    var conf = Math.round((r.confidence || 0) * 100);
+    return '<article class="card chamber-card win-' + c.cls + '">' +
+      '<div class="card-top"><h3>' + esc(r.label) + '</h3><span class="call ' + c.cls + '">' +
+      c.pill + "</span></div>" +
+      probBlock(r) +
+      '<div class="metric-row"><span>Jev confidence</span><strong>' + conf + "%</strong></div>" +
+      '<p class="inputs">' + esc(r.inputs_line) + ".</p>" +
+      "</article>";
+  }
+
+  function raceCard(r) {
+    var c = callOf(r.choice);
+    var conf = Math.round((r.confidence || 0) * 100);
+    return '<article class="card race-card win-' + c.cls + '"><div><div class="race-top"><h3>' +
+      esc(r.label) + '</h3><span class="call ' + c.cls + '">' + c.pill + "</span></div>" +
+      '<p class="inputs">' + esc(r.inputs_line) + ".</p></div>" +
+      '<div class="race-metrics">' + probBlock(r) +
+      '<div class="metric-row"><span>Confidence</span><strong>' + conf + "%</strong></div></div>" +
+      "</article>";
+  }
+
+  function legendHTML() {
+    return '<div class="legend" aria-label="Call color legend">' +
+      '<span><i class="d"></i>Democrat win</span>' +
+      '<span><i class="r"></i>Republican win</span>' +
+      '<span><i class="t"></i>Toss-up</span></div>';
+  }
+
+  function sectionHead(title, right) {
+    return '<div class="section-head"><h2>' + title + "</h2>" + right + "</div>";
+  }
+
+  function fmtTime(iso) {
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return null;
+    var date = d.toLocaleDateString("en-US",
+      { month: "long", day: "numeric", year: "numeric", timeZone: "America/New_York" });
+    var time = d.toLocaleTimeString("en-US",
+      { hour: "numeric", minute: "2-digit", hour12: true, timeZone: "America/New_York" });
+    return date + ", " + time + " ET";
+  }
+
+  function modelShort(m) {
+    // "jev-1.13.0" -> "Jev 1.13.0"
+    if (!m) return "Jev";
+    var mm = /^([a-zA-Z]+)-([\d.]+)$/.exec(m);
+    if (mm) return mm[1].charAt(0).toUpperCase() + mm[1].slice(1) + " " + mm[2];
+    return m;
   }
 
   function render(data) {
     var groups = data.groups || {};
-    document.getElementById("panel-0").innerHTML = (groups.chambers || []).map(cardHTML).join("");
-    document.getElementById("panel-1").innerHTML = (groups.senate || []).map(cardHTML).join("");
-    document.getElementById("panel-2").innerHTML = (groups.governors || []).map(cardHTML).join("");
+    var chambers = groups.chambers || [];
+    var senate = groups.senate || [];
+    var governors = groups.governors || [];
+
+    document.getElementById("panel-0").innerHTML =
+      '<div class="section">' +
+      sectionHead("Chambers", legendHTML()) +
+      '<div class="chambers">' + chambers.map(chamberCard).join("") + "</div></div>";
+
+    document.getElementById("panel-1").innerHTML =
+      '<div class="section">' +
+      sectionHead("Senate races",
+        '<span class="count">' + senate.length + " races · Winner probability shown</span>") +
+      '<div class="races">' + senate.map(raceCard).join("") + "</div></div>";
+
+    document.getElementById("panel-2").innerHTML =
+      '<div class="section">' +
+      sectionHead("Governors",
+        '<span class="count">' + governors.length + " races · Winner probability shown</span>") +
+      '<div class="races">' + governors.map(raceCard).join("") + "</div></div>";
+
     var ts = Date.parse(data.updated_at);
-    var stale = !ts || Date.now() - ts > 4 * 3600 * 1000;
-    freshDot.className = "dot" + (stale ? " stale" : "");
-    freshText.textContent = ts
-      ? "Fresh " + ago(ts) + " · auto-refreshes every 10 min"
+    var label = fmtTime(data.updated_at);
+    var stale = !ts || (Date.now() - ts > STALE_MS);
+    liveBadge.textContent = "CURRENT · " + modelShort(data.model);
+    liveBadge.classList.toggle("stale", stale);
+    timestampEl.textContent = label
+      ? "Last updated: " + label + " · auto-refreshes every 10 min"
       : "Update time unknown";
+    footerLine.textContent = (label ? "Data from the " + label + " " + modelShort(data.model) + " run." : "Forecast data.") +
+      " · Sources: Wikipedia polls and Polymarket markets.";
+
+    if (data.changes) {
+      changesText.textContent = data.changes;
+      changesBox.hidden = false;
+    } else {
+      changesBox.hidden = true;
+    }
   }
 
-  function fail(msg) {
+  function fail() {
     errBox.style.display = "block";
-    errBox.textContent = msg;
+    errBox.textContent = "Couldn't reach fresh data — showing last loaded numbers.";
   }
 
   function load() {
     fetch(DATA_URL + "?t=" + Date.now(), { cache: "no-store" })
       .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
       .then(function (data) { errBox.style.display = "none"; render(data); })
-      .catch(function () { fail("Couldn't reach fresh data — showing last loaded numbers."); });
+      .catch(fail);
   }
 
   function go(i) {
     current = Math.max(0, Math.min(2, i));
-    tabs.forEach(function (t, k) { t.classList.toggle("active", k === current); });
+    tabs.forEach(function (t, k) {
+      var on = k === current;
+      t.setAttribute("aria-selected", on ? "true" : "false");
+      if (on) { t.removeAttribute("tabindex"); } else { t.setAttribute("tabindex", "-1"); }
+    });
     panelsEl.style.transform = "translateX(-" + current * 100 + "%)";
   }
   tabs.forEach(function (t) {
-    t.addEventListener("click", function () { go(parseInt(t.dataset.i, 10)); });
+    t.addEventListener("click", function () { go(parseInt(t.getAttribute("data-i"), 10)); });
   });
   panelsEl.addEventListener("touchstart", function (e) { startX = e.touches[0].clientX; }, { passive: true });
   panelsEl.addEventListener("touchend", function (e) {
@@ -93,6 +171,7 @@
     startX = null;
   }, { passive: true });
 
+  go(0);
   load();
   setInterval(load, REFRESH_MS);
 })();
