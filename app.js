@@ -42,25 +42,6 @@
       "</div>";
   }
 
-  function layaHTML(laya) {
-    if (!laya) return '<div class="laya-note">No shadow-test data yet.</div>';
-    var h = '<div class="laya-note"><b>Laya shadow test</b> — a second, independent model ' +
-      "calls the same races to keep Jev honest.<br>Model: " + esc(laya.model) +
-      "<br>Agreement: <b>" + esc(laya.chunav_agreement) + "</b> races" +
-      (laya.run_date ? " · run " + esc(laya.run_date) : "") + "</div>";
-    var diffs = laya.differences || [];
-    if (!diffs.length) return h + '<div class="laya-note">Full agreement — no differences this run.</div>';
-    h += '<table class="diff"><tr><th>Race</th><th>Psepho (Jev)</th><th>Laya</th></tr>';
-    diffs.forEach(function (d) {
-      h += "<tr><td>" + esc(d.race) + "</td><td>" + esc(callShort(d.jev_choice)) + " " +
-        esc(d.jev_dem_pct) + "%</td><td>" + esc(callShort(d.laya_choice)) + "</td></tr>";
-    });
-    return h + "</table>";
-  }
-  function callShort(c) {
-    return c === "democrat_win" ? "Dem" : c === "republican_win" ? "GOP" : "Toss-up";
-  }
-
   function ago(ts) {
     var s = Math.max(0, Math.round((Date.now() - ts) / 1000));
     if (s < 60) return "just now";
@@ -76,7 +57,6 @@
     document.getElementById("panel-0").innerHTML = (groups.chambers || []).map(cardHTML).join("");
     document.getElementById("panel-1").innerHTML = (groups.senate || []).map(cardHTML).join("");
     document.getElementById("panel-2").innerHTML = (groups.governors || []).map(cardHTML).join("");
-    document.getElementById("panel-3").innerHTML = layaHTML(data.laya);
     var ts = Date.parse(data.updated_at);
     var stale = !ts || Date.now() - ts > 4 * 3600 * 1000;
     freshDot.className = "dot" + (stale ? " stale" : "");
@@ -98,7 +78,7 @@
   }
 
   function go(i) {
-    current = Math.max(0, Math.min(3, i));
+    current = Math.max(0, Math.min(2, i));
     tabs.forEach(function (t, k) { t.classList.toggle("active", k === current); });
     panelsEl.style.transform = "translateX(-" + current * 100 + "%)";
   }
