@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Psepho — who's actually winning</title>
+<meta name="description" content="2026 US election odds: polls + betting markets, called by an AI decision model. No spin.">
+<style>
+  :root{
+    --bg:#faf9f7; --card:#ffffff; --ink:#1a1a1a; --muted:#6b6b6b;
+    --dem:#16a34a; --rep:#dc2626; --toss:#ca8a04;
+    --radius:16px;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  body{margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       background:var(--bg); color:var(--ink);}
+  header{padding:28px 20px 12px; max-width:720px; margin:0 auto;}
+  .wordmark{font-size:34px; font-weight:800; letter-spacing:-1px;}
+  .wordmark span{color:var(--dem);}
+  .tagline{color:var(--muted); font-size:15px; margin-top:4px; line-height:1.45;}
+  .fresh{margin-top:10px; font-size:13px; color:var(--muted); display:flex; align-items:center; gap:8px;}
+  .dot{width:8px; height:8px; border-radius:50%; background:var(--dem); display:inline-block;}
+  .dot.stale{background:var(--toss);}
+  nav.tabs{position:sticky; top:0; z-index:10; background:rgba(250,249,247,.94);
+           backdrop-filter:blur(8px); border-bottom:1px solid #e8e6e1;}
+  .tabs-inner{max-width:720px; margin:0 auto; display:flex; overflow-x:auto; padding:0 12px;}
+  .tabs-inner::-webkit-scrollbar{display:none;}
+  .tab{flex:1 0 auto; padding:14px 16px; font-size:15px; font-weight:600; color:var(--muted);
+       background:none; border:none; border-bottom:3px solid transparent; cursor:pointer; white-space:nowrap;}
+  .tab.active{color:var(--ink); border-bottom-color:var(--ink);}
+  main{max-width:720px; margin:0 auto; padding:16px 16px 60px; overflow:hidden;}
+  .panels{display:flex; transition:transform .28s ease;}
+  .panel{flex:0 0 100%; min-width:0;}
+  .card{background:var(--card); border-radius:var(--radius); padding:18px; margin-bottom:12px;
+        box-shadow:0 1px 3px rgba(0,0,0,.06);}
+  .card-top{display:flex; justify-content:space-between; align-items:center; gap:10px;}
+  .race-label{font-size:16px; font-weight:700;}
+  .pill{font-size:12px; font-weight:700; padding:4px 10px; border-radius:999px; white-space:nowrap;}
+  .pill.dem{background:#dcfce7; color:#15803d;}
+  .pill.rep{background:#fee2e2; color:#b91c1c;}
+  .pill.toss{background:#fef9c3; color:#a16207;}
+  .pct{font-size:44px; font-weight:800; letter-spacing:-1px; margin:8px 0 2px;}
+  .pct.dem{color:var(--dem);} .pct.rep{color:var(--rep);} .pct.toss{color:var(--toss);}
+  .verdict{font-size:14px; color:var(--muted); margin-bottom:10px;}
+  .conf{display:flex; align-items:center; gap:8px; font-size:12px; color:var(--muted);}
+  .bar{flex:1; height:6px; background:#eee; border-radius:3px; overflow:hidden;}
+  .bar i{display:block; height:100%; background:#9ca3af; border-radius:3px;}
+  .inputs{font-size:12.5px; color:var(--muted); margin-top:10px; line-height:1.5;
+          border-top:1px dashed #e8e6e1; padding-top:10px;}
+  .laya-note{background:#f5f3ff; border-radius:var(--radius); padding:16px 18px; margin-bottom:12px; font-size:14px; line-height:1.55;}
+  table.diff{width:100%; border-collapse:collapse; font-size:13px; background:var(--card);
+             border-radius:var(--radius); overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,.06);}
+  table.diff th, table.diff td{text-align:left; padding:10px 12px; border-bottom:1px solid #f0eeea;}
+  table.diff th{font-size:12px; color:var(--muted); font-weight:600;}
+  footer{max-width:720px; margin:0 auto; padding:0 20px 40px; font-size:12.5px; color:var(--muted); line-height:1.6;}
+  .err{background:#fef2f2; color:#b91c1c; border-radius:12px; padding:14px 16px; margin-bottom:12px; font-size:14px; display:none;}
+</style>
+</head>
+<body>
+<header>
+  <div class="wordmark">Psepho<span>.</span></div>
+  <div class="tagline">Who's actually winning the 2026 elections. Polls + betting markets, read by an AI decision model — no spin, no pundits.</div>
+  <div class="fresh"><span class="dot" id="freshDot"></span><span id="freshText">loading…</span></div>
+</header>
+<nav class="tabs"><div class="tabs-inner" id="tabBar">
+  <button class="tab active" data-i="0">Chambers</button>
+  <button class="tab" data-i="1">Senate</button>
+  <button class="tab" data-i="2">Governors</button>
+  <button class="tab" data-i="3">Laya Lab</button>
+</div></nav>
+<main>
+  <div class="err" id="errBox"></div>
+  <div class="panels" id="panels">
+    <section class="panel" id="panel-0"></section>
+    <section class="panel" id="panel-1"></section>
+    <section class="panel" id="panel-2"></section>
+    <section class="panel" id="panel-3"></section>
+  </div>
+</main>
+<footer>
+  Data: Wikipedia poll aggregates + Polymarket. Calls: TypeSafe Jev decision model.
+  A model reading polls is not a poll — treat it as a smart average, not a prophecy.
+</footer>
+<script src="app.js"></script>
+</body>
+</html>
