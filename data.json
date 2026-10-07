@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-10-06T19:40:55.599532-04:00",
+ "updated_at": "2026-10-06T20:01:56.203294-04:00",
  "model": "jev-1.13.0",
  "groups": {
   "chambers": [
@@ -43,9 +43,9 @@
    {
     "label": "Texas Senate",
     "choice": "democrat_win",
-    "display_pct": 49,
-    "confidence": 0.25,
-    "inputs_line": "polls D+2.4 (7 agg) \u00b7 market P(Dem) 0%"
+    "display_pct": 69,
+    "confidence": 0.57,
+    "inputs_line": "polls D+2.5 (7 agg) \u00b7 market P(Dem) 70%"
    },
    {
     "label": "Maine Senate",
@@ -170,5 +170,5 @@
    }
   ]
  },
- "changes": "Michigan Senate moved from 87% to 92% Democratic win probability. Texas Senate moved from 69% to 49% Democratic win probability. Alaska Senate moved from 56% to 57% Democratic win probability."
+ "changes": "Texas Senate moved from 49% to 69% Democratic win probability."
 }
