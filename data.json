@@ -1,20 +1,20 @@
 {
- "updated_at": "2026-10-08T05:40:53.560131-04:00",
+ "updated_at": "2026-10-08T07:41:02.366489-04:00",
  "model": "jev-1.13.0",
  "groups": {
   "chambers": [
    {
     "label": "Senate control",
     "choice": "democrat_win",
-    "display_pct": 65,
-    "confidence": 0.47,
+    "display_pct": 67,
+    "confidence": 0.48,
     "inputs_line": "polls R+0.2 (6 agg) \u00b7 market P(Dem) 64%"
    },
    {
     "label": "House control",
     "choice": "democrat_win",
-    "display_pct": 78,
-    "confidence": 0.62,
+    "display_pct": 80,
+    "confidence": 0.61,
     "inputs_line": "polls R+0.2 (6 agg) \u00b7 market P(Dem) 90%"
    }
   ],
@@ -22,77 +22,77 @@
    {
     "label": "Georgia Senate",
     "choice": "democrat_win",
-    "display_pct": 96,
-    "confidence": 0.7,
-    "inputs_line": "polls D+6.5 (6 agg) \u00b7 market P(Dem) 94%"
+    "display_pct": 94,
+    "confidence": 0.71,
+    "inputs_line": "polls D+6.5 (6 agg) \u00b7 market P(Dem) 93%"
    },
    {
     "label": "North Carolina Senate",
     "choice": "democrat_win",
     "display_pct": 96,
-    "confidence": 0.7,
+    "confidence": 0.69,
     "inputs_line": "polls D+7.9 (6 agg) \u00b7 market P(Dem) 95%"
    },
    {
     "label": "Michigan Senate",
     "choice": "democrat_win",
-    "display_pct": 85,
-    "confidence": 0.65,
-    "inputs_line": "polls D+3.6 (6 agg) \u00b7 market P(Dem) 84%"
+    "display_pct": 79,
+    "confidence": 0.59,
+    "inputs_line": "polls D+3.6 (6 agg) \u00b7 market P(Dem) 75%"
    },
    {
     "label": "Texas Senate",
     "choice": "democrat_win",
-    "display_pct": 67,
+    "display_pct": 70,
     "confidence": 0.55,
     "inputs_line": "polls D+2.5 (7 agg) \u00b7 market P(Dem) 69%"
    },
    {
     "label": "Maine Senate",
     "choice": "democrat_win",
-    "display_pct": 67,
+    "display_pct": 64,
     "confidence": 0.52,
-    "inputs_line": "polls D+1 (6 agg) \u00b7 market P(Dem) 68%"
+    "inputs_line": "polls D+1 (6 agg) \u00b7 market P(Dem) 69%"
    },
    {
     "label": "Ohio Senate",
     "choice": "democrat_win",
-    "display_pct": 83,
-    "confidence": 0.63,
-    "inputs_line": "polls D+2 (6 agg) \u00b7 market P(Dem) 83%"
+    "display_pct": 82,
+    "confidence": 0.62,
+    "inputs_line": "polls D+2 (6 agg) \u00b7 market P(Dem) 80%"
    },
    {
     "label": "Florida Senate",
     "choice": "republican_win",
     "display_pct": 81,
-    "confidence": 0.5,
+    "confidence": 0.53,
     "inputs_line": "polls R+5.3 (6 agg) \u00b7 market P(Dem) 16%"
    },
    {
     "label": "New Hampshire Senate",
     "choice": "democrat_win",
-    "display_pct": 97,
+    "display_pct": 98,
     "confidence": 0.59,
     "inputs_line": "market P(Dem) 99%"
    },
    {
     "label": "Minnesota Senate",
     "choice": "democrat_win",
-    "display_pct": 88,
+    "display_pct": 85,
     "confidence": 0.45,
-    "inputs_line": "market P(Dem) 78%"
+    "inputs_line": "market P(Dem) 76%"
    },
    {
     "label": "Iowa Senate",
-    "choice": "democrat_win",
-    "display_pct": 58,
-    "confidence": 0.41,
-    "inputs_line": "polls D+0 (6 agg) \u00b7 market P(Dem) 62%"
+    "choice": "toss_up",
+    "display_pct": 50,
+    "confidence": 0.38,
+    "inputs_line": "polls D+0 (6 agg) \u00b7 market P(Dem) 61%"
    },
    {
     "label": "Alaska Senate",
-    "choice": "toss_up",
-    "display_pct": 50,
+    "choice": "democrat_win",
+    "display_pct": 56,
     "confidence": 0.39,
     "inputs_line": "polls D+2 (6 agg)"
    }
@@ -101,74 +101,74 @@
    {
     "label": "Arizona Governor",
     "choice": "democrat_win",
-    "display_pct": 93,
-    "confidence": 0.76,
+    "display_pct": 94,
+    "confidence": 0.75,
     "inputs_line": "polls D+8 (6 agg) \u00b7 market P(Dem) 90%"
    },
    {
     "label": "Georgia Governor",
     "choice": "toss_up",
     "display_pct": 50,
-    "confidence": 0.35,
+    "confidence": 0.36,
     "inputs_line": "polls R+1.4 (6 agg) \u00b7 market P(Dem) 48%"
    },
    {
     "label": "Kansas Governor",
     "choice": "republican_win",
-    "display_pct": 72,
-    "confidence": 0.39,
+    "display_pct": 74,
+    "confidence": 0.4,
     "inputs_line": "polls R+4.5 (4 agg) \u00b7 market P(Dem) 24%"
    },
    {
     "label": "Maine Governor",
     "choice": "democrat_win",
     "display_pct": 96,
-    "confidence": 0.76,
+    "confidence": 0.77,
     "inputs_line": "polls D+9.5 (6 agg) \u00b7 market P(Dem) 95%"
    },
    {
     "label": "Michigan Governor",
     "choice": "democrat_win",
     "display_pct": 96,
-    "confidence": 0.76,
+    "confidence": 0.77,
     "inputs_line": "polls D+6.9 (6 agg) \u00b7 market P(Dem) 93%"
    },
    {
     "label": "Nevada Governor",
     "choice": "democrat_win",
-    "display_pct": 52,
-    "confidence": 0.39,
+    "display_pct": 51,
+    "confidence": 0.4,
     "inputs_line": "polls R+3.3 (5 agg) \u00b7 market P(Dem) 56%"
    },
    {
     "label": "New Mexico Governor",
     "choice": "democrat_win",
     "display_pct": 97,
-    "confidence": 0.72,
+    "confidence": 0.73,
     "inputs_line": "polls D+7.7 (1 agg) \u00b7 market P(Dem) 96%"
    },
    {
     "label": "Ohio Governor",
     "choice": "democrat_win",
     "display_pct": 74,
-    "confidence": 0.63,
+    "confidence": 0.62,
     "inputs_line": "polls D+3.4 (7 agg) \u00b7 market P(Dem) 68%"
    },
    {
     "label": "Wisconsin Governor",
     "choice": "democrat_win",
-    "display_pct": 86,
+    "display_pct": 88,
     "confidence": 0.67,
     "inputs_line": "polls D+3.8 (3 agg) \u00b7 market P(Dem) 82%"
    },
    {
     "label": "Florida Governor",
     "choice": "republican_win",
-    "display_pct": 74,
-    "confidence": 0.4,
+    "display_pct": 72,
+    "confidence": 0.41,
     "inputs_line": "polls R+4.5 (5 agg) \u00b7 market P(Dem) 22%"
    }
   ]
  },
- "changes": "Texas Senate moved from 58% to 67% Democratic win probability. Iowa Senate moved from 54% to 58% Democratic win probability."
+ "changes": "Michigan Senate moved from 85% to 79% Democratic win probability. Iowa Senate moved from 58% to 57%  win probability. Alaska Senate moved from 55% to 56% Democratic win probability."
 }
