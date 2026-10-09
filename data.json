@@ -1,20 +1,20 @@
 {
- "updated_at": "2026-10-08T23:41:56.467473-04:00",
+ "updated_at": "2026-10-09T01:40:50.701100-04:00",
  "model": "jev-1.13.0",
  "groups": {
   "chambers": [
    {
     "label": "Senate control",
     "choice": "democrat_win",
-    "display_pct": 68,
-    "confidence": 0.47,
+    "display_pct": 64,
+    "confidence": 0.48,
     "inputs_line": "polls R+0.2 (6 agg) \u00b7 market P(Dem) 62%"
    },
    {
     "label": "House control",
     "choice": "democrat_win",
-    "display_pct": 80,
-    "confidence": 0.56,
+    "display_pct": 78,
+    "confidence": 0.61,
     "inputs_line": "polls R+0.2 (6 agg) \u00b7 market P(Dem) 90%"
    }
   ],
@@ -22,78 +22,78 @@
    {
     "label": "Georgia Senate",
     "choice": "democrat_win",
-    "display_pct": 98,
-    "confidence": 0.7,
-    "inputs_line": "polls D+6.5 (6 agg) \u00b7 market P(Dem) 99%"
+    "display_pct": 92,
+    "confidence": 0.69,
+    "inputs_line": "polls D+6.5 (6 agg) \u00b7 market P(Dem) 89%"
    },
    {
     "label": "North Carolina Senate",
     "choice": "democrat_win",
-    "display_pct": 98,
-    "confidence": 0.69,
+    "display_pct": 97,
+    "confidence": 0.68,
     "inputs_line": "polls D+7.7 (6 agg) \u00b7 market P(Dem) 99%"
    },
    {
     "label": "Michigan Senate",
     "choice": "democrat_win",
-    "display_pct": 86,
-    "confidence": 0.62,
-    "inputs_line": "polls D+3.5 (6 agg) \u00b7 market P(Dem) 77%"
+    "display_pct": 96,
+    "confidence": 0.7,
+    "inputs_line": "polls D+3.5 (6 agg) \u00b7 market P(Dem) 93%"
    },
    {
     "label": "Texas Senate",
     "choice": "democrat_win",
-    "display_pct": 69,
-    "confidence": 0.56,
+    "display_pct": 72,
+    "confidence": 0.54,
     "inputs_line": "polls D+2.4 (7 agg) \u00b7 market P(Dem) 69%"
    },
    {
     "label": "Maine Senate",
     "choice": "democrat_win",
-    "display_pct": 57,
-    "confidence": 0.48,
-    "inputs_line": "polls D+1 (6 agg) \u00b7 market P(Dem) 61%"
+    "display_pct": 65,
+    "confidence": 0.51,
+    "inputs_line": "polls D+1 (6 agg) \u00b7 market P(Dem) 67%"
    },
    {
     "label": "Ohio Senate",
     "choice": "democrat_win",
-    "display_pct": 82,
+    "display_pct": 81,
     "confidence": 0.61,
     "inputs_line": "polls D+2 (6 agg) \u00b7 market P(Dem) 80%"
    },
    {
     "label": "Florida Senate",
     "choice": "republican_win",
-    "display_pct": 80,
-    "confidence": 0.54,
-    "inputs_line": "polls R+5.2 (6 agg) \u00b7 market P(Dem) 16%"
+    "display_pct": 78,
+    "confidence": 0.49,
+    "inputs_line": "polls R+5.2 (6 agg) \u00b7 market P(Dem) 15%"
    },
    {
     "label": "New Hampshire Senate",
     "choice": "democrat_win",
     "display_pct": 98,
-    "confidence": 0.58,
+    "confidence": 0.57,
     "inputs_line": "market P(Dem) 99%"
    },
    {
     "label": "Minnesota Senate",
     "choice": "democrat_win",
-    "display_pct": 88,
+    "display_pct": 85,
     "confidence": 0.44,
-    "inputs_line": "market P(Dem) 78%"
+    "inputs_line": "market P(Dem) 76%"
    },
    {
     "label": "Iowa Senate",
-    "choice": "democrat_win",
-    "display_pct": 56,
-    "confidence": 0.44,
-    "inputs_line": "polls D+0 (6 agg) \u00b7 market P(Dem) 63%"
+    "choice": "toss_up",
+    "display_pct": 50,
+    "confidence": 0.43,
+    "inputs_line": "polls D+0 (6 agg) \u00b7 market P(Dem) 62%"
    },
    {
     "label": "Alaska Senate",
     "choice": "toss_up",
     "display_pct": 50,
-    "confidence": 0.38,
+    "confidence": 0.39,
     "inputs_line": "polls D+2 (6 agg)"
    }
   ],
@@ -101,29 +101,29 @@
    {
     "label": "Arizona Governor",
     "choice": "democrat_win",
-    "display_pct": 94,
-    "confidence": 0.75,
+    "display_pct": 93,
+    "confidence": 0.74,
     "inputs_line": "polls D+7.1 (6 agg) \u00b7 market P(Dem) 90%"
    },
    {
     "label": "Georgia Governor",
     "choice": "republican_win",
     "display_pct": 54,
-    "confidence": 0.36,
+    "confidence": 0.37,
     "inputs_line": "polls R+2.2 (6 agg) \u00b7 market P(Dem) 48%"
    },
    {
     "label": "Kansas Governor",
     "choice": "republican_win",
     "display_pct": 71,
-    "confidence": 0.36,
+    "confidence": 0.37,
     "inputs_line": "polls R+3.9 (4 agg) \u00b7 market P(Dem) 24%"
    },
    {
     "label": "Maine Governor",
     "choice": "democrat_win",
-    "display_pct": 96,
-    "confidence": 0.76,
+    "display_pct": 97,
+    "confidence": 0.78,
     "inputs_line": "polls D+9.5 (6 agg) \u00b7 market P(Dem) 95%"
    },
    {
@@ -136,39 +136,39 @@
    {
     "label": "Nevada Governor",
     "choice": "republican_win",
-    "display_pct": 50,
+    "display_pct": 52,
     "confidence": 0.4,
     "inputs_line": "polls R+3.6 (5 agg) \u00b7 market P(Dem) 55%"
    },
    {
     "label": "New Mexico Governor",
     "choice": "democrat_win",
-    "display_pct": 98,
-    "confidence": 0.72,
+    "display_pct": 97,
+    "confidence": 0.73,
     "inputs_line": "polls D+7.7 (1 agg) \u00b7 market P(Dem) 96%"
    },
    {
     "label": "Ohio Governor",
     "choice": "democrat_win",
-    "display_pct": 76,
+    "display_pct": 74,
     "confidence": 0.62,
     "inputs_line": "polls D+3.3 (6 agg) \u00b7 market P(Dem) 68%"
    },
    {
     "label": "Wisconsin Governor",
     "choice": "democrat_win",
-    "display_pct": 86,
-    "confidence": 0.66,
+    "display_pct": 85,
+    "confidence": 0.67,
     "inputs_line": "polls D+3.8 (3 agg) \u00b7 market P(Dem) 82%"
    },
    {
     "label": "Florida Governor",
     "choice": "republican_win",
     "display_pct": 72,
-    "confidence": 0.4,
+    "confidence": 0.38,
     "inputs_line": "polls R+4 (6 agg) \u00b7 market P(Dem) 22%"
    }
   ]
  },
- "changes": "Iowa Senate moved from 57% to 56% Democratic win probability. Alaska Senate moved from 56% to 56%  win probability. Georgia Governor moved from 46% to 46% Republican win probability."
+ "changes": "Michigan Senate moved from 86% to 96% Democratic win probability. Maine Senate moved from 57% to 65% Democratic win probability. Iowa Senate moved from 56% to 56%  win probability."
 }
