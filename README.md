@@ -1,8 +1,9 @@
-# Psepho — how `data.json` is generated
+# Psepho — election forecast (https://psepho.socialnews.xyz/)
 
-Everything that produces the live forecast at https://psepho.socialnews.xyz/
-(`data.json` in the repo root), plus the PHP renderer for the Plesk box.
-The live page itself is `index.html` + `app.js`; it only fetches `data.json`.
+Jev-powered election forecast: 2 chambers + 11 Senate + 10 governor
+races, refreshed every 2 hours. The live page (`index.html` + `app.js`)
+only fetches `data.json`; everything that produces `data.json` lives in
+`generator/`, and `php/` holds the PHP renderer for the Plesk box.
 
 ## Pipeline (runs every 2 hours)
 
@@ -37,12 +38,13 @@ the main-chat announcement only fires on a material change.
 
 | File | What it is |
 |---|---|
-| `refresh.sh` | Driver: starts the data server if needed, fetches `forecast.json`, runs the Jev calls, runs the change gate. Runtime paths are `$HOME/workspace/chunav-forecast` and `$HOME/workspace/chunav-odds`. |
-| `run_jev.py` | The 23 live-Jev calls (2 chambers + 11 Senate + 10 governor races). Reads `forecast.json`, writes `live_results.json`. |
-| `compare.py` | Material-change gate. Exit 0 = something moved, exit 2 = no material change. |
-| `make_psepho_data.py` | Builds `data.json` from `live_results.json` (+ `changes.txt` for the "Latest changes" line). Previously also lived at the repo root; the `generator/` copy is canonical. |
-| `chunav-odds/` | The data server: `server.js` + `lib/` (`forecast.js`, `polls.js`, `polymarket.js`, `jev-client.js`, `cache.js`) + `package.json` (only dependency: `express`). Run with `node server.js` (port 3006, or `$PORT`). |
-| `../php/index.php` | PHP renderer for the Plesk box: fetches the live `data.json`, caches it locally 10 minutes, renders server-side, falls back to the last cached copy. Upload to `.../SocialNewsXYZ/psepho/index.php`. |
+| `index.html`, `app.js`, `data.json`, `CNAME` | The static site itself. |
+| `generator/refresh.sh` | Driver: starts the data server if needed, fetches `forecast.json`, runs the Jev calls, runs the change gate. Runtime paths are `$HOME/workspace/chunav-forecast` and `$HOME/workspace/chunav-odds`. |
+| `generator/run_jev.py` | The 23 live-Jev calls (2 chambers + 11 Senate + 10 governor races). Reads `forecast.json`, writes `live_results.json`. |
+| `generator/compare.py` | Material-change gate. Exit 0 = something moved, exit 2 = no material change. |
+| `generator/make_psepho_data.py` | Builds `data.json` from `live_results.json` (+ `changes.txt` for the "Latest changes" line). |
+| `generator/chunav-odds/` | The data server: `server.js` + `lib/` (`forecast.js`, `polls.js`, `polymarket.js`, `jev-client.js`, `cache.js`) + `package.json` (only dependency: `express`). Run with `node server.js` (port 3006, or `$PORT`). |
+| `php/index.php` | PHP renderer for the Plesk box: fetches the live `data.json`, caches it locally 10 minutes, renders server-side, falls back to the last cached copy. Upload to `.../SocialNewsXYZ/psepho/index.php`. |
 
 ## Dependency note
 
@@ -57,7 +59,7 @@ back to a stub when unset.
 
 - `forecast.json`, `live_results.json`, `prev_results.json`, `changes.txt`
   (per-run outputs; `data.json` is the only published artifact)
-- `chunav-odds/data/cache.json` (runtime poll/market cache)
+- `generator/chunav-odds/data/cache.json` (runtime poll/market cache)
 - `node_modules/`, API keys, or any credential
 
 ---
