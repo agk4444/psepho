@@ -59,3 +59,6 @@ back to a stub when unset.
   (per-run outputs; `data.json` is the only published artifact)
 - `chunav-odds/data/cache.json` (runtime poll/market cache)
 - `node_modules/`, API keys, or any credential
+
+---
+© 2026 AGK FIRE INC. All rights reserved. See LICENSE.
