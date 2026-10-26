@@ -1,0 +1,1 @@
+{"dependencies":{"express":"^4.19.2"},"description":"Election odds app: public polls + prediction markets, decided by TypeSafe Jev","main":"server.js","name":"chunav-odds","scripts":{"start":"node server.js"},"version":"1.0.0"}
