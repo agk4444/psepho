@@ -32,6 +32,7 @@ const GOVERNORS = [
   { state: 'Ohio', wiki: '2026 Ohio gubernatorial election' },
   { state: 'Wisconsin', wiki: '2026 Wisconsin gubernatorial election' },
   { state: 'Florida', wiki: '2026 Florida gubernatorial election' },
+  { state: 'Texas', wiki: '2026 Texas gubernatorial election' },
 ];
 
 function daysAgo(dateStr) {
